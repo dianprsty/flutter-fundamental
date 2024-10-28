@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fundamental/feature/demo/layout_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -11,9 +12,36 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Container(
+        padding: const EdgeInsets.all(8),
+        color: Colors.white,
+        width: MediaQuery.of(context).size.width * 0.8,
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 64,
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/saved');
+              },
+              child: const Row(
+                children: [
+                  Icon(Icons.bookmark),
+                  SizedBox(width: 10),
+                  Text('Saved'),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+      appBar: AppBar(
+        title: const Text('Profile Page'),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
+        child: ListView(
           children: [
             const SizedBox(height: 40),
             Image.asset(
@@ -49,7 +77,6 @@ class _ProfilePageState extends State<ProfilePage> {
             profileItem('About Us',
                 icon: const Icon(Icons.question_mark_outlined, size: 20)),
             const Divider(),
-            const Expanded(child: SizedBox()),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -59,7 +86,14 @@ class _ProfilePageState extends State<ProfilePage> {
                     borderRadius: BorderRadius.all(Radius.circular(12)),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LayoutPage(),
+                      ),
+                      (route) => route.isFirst);
+                },
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

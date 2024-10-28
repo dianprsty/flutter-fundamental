@@ -58,7 +58,7 @@ class BasicWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     hintText: "Email.",
-                    label: Text("Email"),
+                    label: const Text("Email"),
                   ),
                 )),
             const SizedBox(height: 40),
@@ -75,7 +75,7 @@ class BasicWidget extends StatelessWidget {
                   onPressed: () {
                     log("Button pressed");
                   },
-                  child: Text(
+                  child: const Text(
                     "Button",
                     style: TextStyle(color: Colors.white),
                   ),
