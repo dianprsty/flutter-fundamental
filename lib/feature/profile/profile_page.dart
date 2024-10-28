@@ -56,6 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
+              textAlign: TextAlign.center,
             ),
             const Text(
               'dprasmail@gmail.com',
@@ -63,6 +64,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 fontSize: 14,
                 color: Colors.black87,
               ),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 40),
             const Divider(),
