@@ -1,16 +1,12 @@
 # flutter_fundamental
 
-A new Flutter project.
+Belajar basic widget dart
 
-## Getting Started
+- Buatlah project flutter baru
+- Buatlah 1 halaman dengan tampilan seperti gambar di bawah.
+- Cara penyusunan widget bebas.
+- Tampilah boleh dikreasikan, tidak harus sama persis.
 
-This project is a starting point for a Flutter application.
+## Screenshoot
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="assets/images/screenshoots/profile.png" width=300 alt='profile page' >

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_fundamental/pages/basic_widget.dart';
-import 'package:flutter_fundamental/pages/layout_page.dart';
 import 'package:flutter_fundamental/pages/profile_page.dart';
 
 void main() {
@@ -19,6 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      debugShowCheckedModeBanner: false,
       home: const ProfilePage(),
       // home: const LayoutPage(),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
