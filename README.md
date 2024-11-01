@@ -1,17 +1,13 @@
 # flutter_fundamental
 
-A new Flutter project.
+Tugas layouting dan navigation
 
-## Getting Started
+- Buatlah 3 halaman, contoh seperti di halaman selanjutnya, boleh di improve, tidak harus sama persis.
+- Terapkan navigasi dengan BottomNavigaionBar dan PageView.
+- Tambahkan Screenshoot tiap page kalian pada README.md
 
-This project is a starting point for a Flutter application.
+## Screenshoot
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-![alt text](Screenshot_1730031578.png)
+<img src='assets/images/screenshoots/home.png' width=300 alt="home page" >
+<img src='assets/images/screenshoots/saved.png' width=300 alt="saved page" >
+<img src='assets/images/screenshoots/profile.png' width=300 alt="profile page" >

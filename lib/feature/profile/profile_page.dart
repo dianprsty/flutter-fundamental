@@ -12,33 +12,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Container(
-        padding: const EdgeInsets.all(8),
-        color: Colors.white,
-        width: MediaQuery.of(context).size.width * 0.8,
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 64,
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/saved');
-              },
-              child: const Row(
-                children: [
-                  Icon(Icons.bookmark),
-                  SizedBox(width: 10),
-                  Text('Saved'),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-      appBar: AppBar(
-        title: const Text('Profile Page'),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView(
