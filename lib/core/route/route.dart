@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fundamental/feature/auth/login_page.dart';
+import 'package:flutter_fundamental/feature/auth/register_page.dart';
 import 'package:flutter_fundamental/feature/demo/layout_page.dart';
 import 'package:flutter_fundamental/feature/main/main_page.dart';
 import 'package:flutter_fundamental/feature/profile/profile_page.dart';
@@ -10,6 +12,8 @@ import 'package:flutter_fundamental/feature/user_interaction/picker/picker.dart'
 
 Map<String, Widget Function(BuildContext)> appRoutes = {
   '/': (context) => const MainPage(),
+  '/login': (context) => const LoginPage(),
+  '/register': (context) => const RegisterPage(),
   '/saved': (context) => const SavedPage(),
   '/profile': (context) => const ProfilePage(),
   '/layout': (context) => const LayoutPage(),

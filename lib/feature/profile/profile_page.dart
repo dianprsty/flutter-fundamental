@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_fundamental/feature/demo/layout_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -61,13 +60,44 @@ class _ProfilePageState extends State<ProfilePage> {
                     borderRadius: BorderRadius.all(Radius.circular(12)),
                   ),
                 ),
-                onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const LayoutPage(),
-                      ),
-                      (route) => route.isFirst);
+                onPressed: () async {
+                  await showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        icon: const Icon(
+                          Icons.info_outline,
+                          size: 60,
+                          color: Colors.red,
+                        ),
+                        title: const Text('Logout'),
+                        alignment: Alignment.center,
+                        content: const Text(
+                          'Are you sure want to logout?',
+                          textAlign: TextAlign.center,
+                        ),
+                        actionsAlignment: MainAxisAlignment.spaceEvenly,
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('No'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                '/login',
+                                (_) => false,
+                              );
+                            },
+                            child: const Text('Yes'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 },
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
