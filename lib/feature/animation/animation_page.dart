@@ -22,6 +22,7 @@ import 'package:flutter_fundamental/feature/animation/implicit/animated_rotation
 import 'package:flutter_fundamental/feature/animation/implicit/animated_size_example.dart';
 import 'package:flutter_fundamental/feature/animation/implicit/animated_switcher_example.dart';
 import 'package:flutter_fundamental/feature/animation/implicit/tween_animation_builder_size_example.dart';
+import 'package:flutter_fundamental/feature/animation/lottie/lottie_example.dart';
 
 class AnimationPage extends StatelessWidget {
   const AnimationPage({super.key});
@@ -33,7 +34,7 @@ class AnimationPage extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.all(24),
           child: ListView(
-            children: const [
+            children: [
               Text("Implicit Animation",
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -51,6 +52,15 @@ class AnimationPage extends StatelessWidget {
                   )),
               SizedBox(height: 16),
               ExplicitAnimation(),
+              const SizedBox(height: 8),
+              OutlinedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => LottieExample(),
+                  ));
+                },
+                child: const Text('Lottie'),
+              ),
             ],
           ),
         ));
