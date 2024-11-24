@@ -64,16 +64,6 @@ class _NewsPageState extends State<NewsPage> {
           appBar: AppBar(
             title: const Text('Saved News'),
             centerTitle: true,
-            actions: [
-              IconButton(
-                onPressed: () {
-                  // Navigator.of(context).push(MaterialPageRoute(
-                  //   builder: (context) {},
-                  // ));
-                },
-                icon: Icon(Icons.dashboard),
-              )
-            ],
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
