@@ -19,7 +19,7 @@ class _FadeTransitionExampleState extends State<FadeTransitionExample>
       duration: const Duration(seconds: 5),
       vsync: this,
     );
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+    _fadeAnimation = Tween<double>(begin: 0.5, end: 1.0).animate(_controller);
     _controller.repeat(reverse: true);
   }
 

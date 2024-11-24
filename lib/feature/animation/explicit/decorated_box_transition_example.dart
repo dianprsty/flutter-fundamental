@@ -18,11 +18,14 @@ class _DecoratedBoxTransitionExampleState
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 2),
       vsync: this,
     );
     _decorationAnimation = DecorationTween(
-      begin: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.zero),
+      begin: BoxDecoration(
+          color: Colors.blue,
+          borderRadius: BorderRadius.zero,
+          border: Border.all(color: Colors.black, width: 3)),
       end: BoxDecoration(
           color: Colors.red, borderRadius: BorderRadius.circular(30)),
     ).animate(_controller);
@@ -42,7 +45,7 @@ class _DecoratedBoxTransitionExampleState
       body: Center(
         child: DecoratedBoxTransition(
           decoration: _decorationAnimation,
-          child: const SizedBox(width: 100, height: 100),
+          child: const SizedBox(width: 200, height: 200),
         ),
       ),
     );

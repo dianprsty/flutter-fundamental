@@ -22,7 +22,7 @@ class _AnimatedCrossFadeExampleState extends State<AnimatedCrossFadeExample> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AnimatedCrossFade(
-              duration: const Duration(seconds: 5),
+              duration: const Duration(seconds: 1),
               firstCurve: Curves.easeInOut,
               firstChild: Container(
                 width: 200,
@@ -35,7 +35,7 @@ class _AnimatedCrossFadeExampleState extends State<AnimatedCrossFadeExample> {
                 ),
               ),
               secondChild: Container(
-                width: 200,
+                width: 250,
                 height: 200,
                 color: Colors.green,
                 alignment: Alignment.center,

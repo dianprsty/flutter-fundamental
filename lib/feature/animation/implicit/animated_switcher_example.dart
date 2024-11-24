@@ -26,10 +26,15 @@ class _AnimatedSwitcherExampleState extends State<AnimatedSwitcherExample> {
               transitionBuilder: (Widget child, Animation<double> animation) {
                 return ScaleTransition(scale: animation, child: child);
               },
-              child: Text(
-                '$counter',
+              child: Container(
+                padding: EdgeInsets.all(16),
+                color: Colors.yellow,
                 key: ValueKey<int>(counter),
-                style: TextStyle(fontSize: 30),
+                child: Text(
+                  '$counter',
+                  key: ValueKey<int>(counter),
+                  style: TextStyle(fontSize: 30),
+                ),
               ),
             ),
             ElevatedButton(

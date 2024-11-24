@@ -16,11 +16,12 @@ class _SizeTransitionExampleState extends State<SizeTransitionExample>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 2),
       vsync: this,
     );
-    _sizeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+    _sizeAnimation = Tween<double>(begin: 0.3, end: 1.0).animate(_controller);
     _controller.repeat();
+    // _controller.forward();
   }
 
   @override

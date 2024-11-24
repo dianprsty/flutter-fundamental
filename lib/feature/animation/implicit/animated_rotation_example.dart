@@ -23,10 +23,10 @@ class _AnimatedRotationExampleState extends State<AnimatedRotationExample> {
           children: [
             AnimatedRotation(
               turns: turns,
-              duration: Duration(seconds: 5),
+              duration: Duration(seconds: 1),
               curve: Curves.easeInOut,
               child: Container(
-                width: 100,
+                width: 10,
                 height: 100,
                 color: Colors.purple,
               ),
@@ -36,7 +36,7 @@ class _AnimatedRotationExampleState extends State<AnimatedRotationExample> {
               onPressed: () {
                 setState(() {
                   turns +=
-                      5; // Memutar sebesar 90 derajat (0.25 dari satu putaran penuh)
+                      1; // Memutar sebesar 90 derajat (0.25 dari satu putaran penuh)
                 });
               },
               child: Text("Rotate"),

@@ -31,10 +31,21 @@ class _TweenAnimationBuilderSizeExampleState
             duration: const Duration(seconds: 1),
             builder: (context, value, child) {
               return Container(
-                width: value,
-                height: value,
-                color: Colors.green,
-              );
+                  width: 300,
+                  height: value,
+                  color: Colors.green,
+                  child: TweenAnimationBuilder<Alignment>(
+                      tween: Tween<Alignment>(
+                          begin: Alignment.bottomRight,
+                          end: isExpanded
+                              ? Alignment.topCenter
+                              : Alignment.bottomRight),
+                      duration: const Duration(seconds: 1),
+                      builder: (context, value, child) {
+                        return Align(
+                            alignment: value,
+                            child: Text("Animated Alignmen Tween"));
+                      }));
             },
           ),
         ),

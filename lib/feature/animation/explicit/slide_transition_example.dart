@@ -21,9 +21,9 @@ class _SlideTransitionExampleState extends State<SlideTransitionExample>
     );
     _slideAnimation = Tween<Offset>(
       begin: Offset.zero,
-      end: const Offset(1, 0),
+      end: const Offset(2, 1),
     ).animate(_controller);
-    _controller.repeat();
+    _controller.repeat(reverse: true);
   }
 
   @override
@@ -36,11 +36,9 @@ class _SlideTransitionExampleState extends State<SlideTransitionExample>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Slide Transition Example")),
-      body: Center(
-        child: SlideTransition(
-          position: _slideAnimation,
-          child: const Icon(Icons.star, size: 50, color: Colors.orange),
-        ),
+      body: SlideTransition(
+        position: _slideAnimation,
+        child: const Icon(Icons.star, size: 50, color: Colors.orange),
       ),
     );
   }

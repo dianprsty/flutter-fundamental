@@ -63,6 +63,14 @@ class _MultiAnimationBuilderExampleState
       body: Center(
         child: AnimatedBuilder(
           animation: _controller,
+          child: Container(
+            width: 100,
+            height: 100,
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
           builder: (context, child) {
             return Transform.rotate(
               angle: _rotationAnimation.value, // Rotasi animasi
@@ -70,14 +78,7 @@ class _MultiAnimationBuilderExampleState
                 scale: _scaleAnimation.value, // Skala animasi
                 child: Opacity(
                   opacity: _opacityAnimation.value, // Opacity animasi
-                  child: Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
+                  child: child,
                 ),
               ),
             );

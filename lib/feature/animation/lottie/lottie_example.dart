@@ -18,7 +18,7 @@ class _LottieExampleState extends State<LottieExample>
     super.initState();
     _loadingController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 5),
     );
 
     _loadingController.repeat();
@@ -41,7 +41,7 @@ class _LottieExampleState extends State<LottieExample>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Lottie Example')),
+      appBar: AppBar(title: const Text('Lottie Example')),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -55,13 +55,13 @@ class _LottieExampleState extends State<LottieExample>
             children: [
               OutlinedButton(
                   onPressed: () => _complexController.stop(),
-                  child: Text("Pause")),
-              SizedBox(
+                  child: const Text("Pause")),
+              const SizedBox(
                 width: 16,
               ),
               OutlinedButton(
                   onPressed: () => _complexController.repeat(),
-                  child: Text("Play")),
+                  child: const Text("Play")),
             ],
           ),
           Lottie.asset('assets/lotties/lottie-2.json',

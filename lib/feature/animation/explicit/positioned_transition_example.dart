@@ -22,7 +22,7 @@ class _PositionedTransitionExampleState
       vsync: this,
     );
     _positionAnimation = RelativeRectTween(
-      begin: const RelativeRect.fromLTRB(0, 0, 300, 300),
+      begin: const RelativeRect.fromLTRB(0, 0, 30, 300),
       end: const RelativeRect.fromLTRB(300, 300, 0, 0),
     ).animate(_controller);
     _controller.repeat(reverse: true);

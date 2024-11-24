@@ -22,8 +22,9 @@ class _DefaultTextStyleTransitionExampleState
       vsync: this,
     );
     _textStyleAnimation = TextStyleTween(
-      begin: TextStyle(fontSize: 20, color: Colors.blue),
-      end: TextStyle(fontSize: 40, color: Colors.red),
+      begin: const TextStyle(fontSize: 20, color: Colors.blue),
+      end: const TextStyle(
+          fontSize: 40, color: Colors.red, fontWeight: FontWeight.bold),
     ).animate(_controller);
     _controller.repeat(reverse: true);
   }

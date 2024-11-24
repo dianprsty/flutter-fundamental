@@ -11,6 +11,7 @@ class RotationTransitionExample extends StatefulWidget {
 class _RotationTransitionExampleState extends State<RotationTransitionExample>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+  late Animation<double> _animation;
 
   @override
   void initState() {
@@ -18,7 +19,10 @@ class _RotationTransitionExampleState extends State<RotationTransitionExample>
     _controller = AnimationController(
       duration: const Duration(seconds: 2),
       vsync: this,
-    )..repeat();
+    );
+
+    _animation = Tween<double>(begin: 1.0, end: 0).animate(_controller);
+    _controller.repeat();
   }
 
   @override
@@ -32,9 +36,25 @@ class _RotationTransitionExampleState extends State<RotationTransitionExample>
     return Scaffold(
       appBar: AppBar(title: const Text("Rotation Transition Example")),
       body: Center(
-        child: RotationTransition(
-          turns: _controller,
-          child: const Icon(Icons.sync, size: 100, color: Colors.blue),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            RotationTransition(
+              turns: _animation,
+              child: const Icon(Icons.sync, size: 100, color: Colors.blue),
+            ),
+            const SizedBox(height: 20),
+            OutlinedButton(
+                onPressed: () {
+                  _controller.stop();
+                },
+                child: Text(("stop"))),
+            OutlinedButton(
+                onPressed: () {
+                  _controller.repeat();
+                },
+                child: Text(("play")))
+          ],
         ),
       ),
     );
