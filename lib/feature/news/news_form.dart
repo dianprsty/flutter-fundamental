@@ -33,7 +33,7 @@ class _NewsFormState extends State<NewsForm> {
       _titleController.text = widget.news!.title ?? '';
       _contentController.text = widget.news!.content ?? '';
       _categoryController.text = widget.news!.category ?? '';
-      _selectedDate = widget.news!.date;
+      _selectedDate = widget.news?.date;
       _image =
           widget.news!.imageUrl != null ? XFile(widget.news!.imageUrl!) : null;
     }
@@ -139,10 +139,6 @@ class _NewsFormState extends State<NewsForm> {
           const SizedBox(height: 16),
           PrimaryButton(
             onPressed: () {
-              log('Pressed ${_titleController.text}');
-              log('Pressed ${_contentController.text}');
-              log('Pressed ${_categoryController.text}');
-              log('image: ${_image?.path}');
               NewsModel news = NewsModel(
                 id: widget.news?.id ?? 0,
                 title: _titleController.text,

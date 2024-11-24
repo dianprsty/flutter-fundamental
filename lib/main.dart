@@ -5,7 +5,7 @@ import 'package:flutter_fundamental/core/route/route.dart';
 late ObjectBox objectbox;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // objectbox = await ObjectBox.create();
+  objectbox = await ObjectBox.create();
   runApp(const MyApp());
 }
 
