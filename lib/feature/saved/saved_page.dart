@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_fundamental/feature/news/news_page.dart';
 import 'package:flutter_fundamental/feature/responsive/responsive.dart';
@@ -15,31 +17,38 @@ class SavedPage extends StatelessWidget {
         children: [
           OutlinedButton(
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const Responsive(),
-              ));
+              Navigator.pushNamed(context, '/animation');
             },
-            child: const Text('Go to Responsive'),
+            child: const Text('Go to Animation'),
           ),
-          const SizedBox(height: 16),
-          OutlinedButton(
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const NewsPage(),
-              ));
-            },
-            child: const Text('Go to News'),
-          ),
-          const SizedBox(height: 16),
-          OutlinedButton(
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const Todopage(),
-              ));
-            },
-            child: const Text('Go to Todo'),
-          ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
+          // OutlinedButton(
+          //   onPressed: () {
+          //     Navigator.of(context).push(MaterialPageRoute(
+          //       builder: (context) => const Responsive(),
+          //     ));
+          //   },
+          //   child: const Text('Go to Responsive'),
+          // ),
+          // const SizedBox(height: 16),
+          // OutlinedButton(
+          //   onPressed: () {
+          //     Navigator.of(context).push(MaterialPageRoute(
+          //       builder: (context) => const NewsPage(),
+          //     ));
+          //   },
+          //   child: const Text('Go to News'),
+          // ),
+          // const SizedBox(height: 16),
+          // OutlinedButton(
+          //   onPressed: () {
+          //     Navigator.of(context).push(MaterialPageRoute(
+          //       builder: (context) => const Todopage(),
+          //     ));
+          //   },
+          //   child: const Text('Go to Todo'),
+          // ),
+          // const SizedBox(height: 16),
           // GestureDetector(
           //   onTap: () {
           //     log('Tapped');
