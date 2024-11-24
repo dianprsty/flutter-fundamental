@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 List<Map<String, String>> newsArticles = [
   {
@@ -64,7 +65,7 @@ class HomePage extends StatelessWidget {
         child: ListView(
           children: [
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
                   gradient: LinearGradient(
@@ -72,23 +73,31 @@ class HomePage extends StatelessWidget {
                     end: Alignment.bottomRight,
                     colors: [Colors.blue.shade400, Colors.lightBlue.shade300],
                   )),
-              child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Stack(
                 children: [
-                  SizedBox(height: 64),
-                  Text(
-                    'Welcome Back, Dian!',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
-                        color: Colors.white),
+                  Align(
+                      alignment: Alignment.topRight,
+                      child: Lottie.asset('assets/lotties/astronaut.json',
+                          height: 120)),
+                  const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 64),
+                      Text(
+                        'Welcome Back, Dian!',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                            color: Colors.white),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        'Discover a world of news that matter to you',
+                        style: TextStyle(fontSize: 14, color: Colors.white),
+                      ),
+                      SizedBox(height: 24),
+                    ],
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Discover a world of news that matter to you',
-                    style: TextStyle(fontSize: 14, color: Colors.white),
-                  ),
-                  const SizedBox(height: 24),
                 ],
               ),
             ),
@@ -204,12 +213,12 @@ class HomePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Chip(
-                            labelPadding: EdgeInsets.all(0),
+                            labelPadding: const EdgeInsets.all(0),
                             visualDensity: VisualDensity.compact,
                             label: Text(
                               newsArticles[index]['category'] ?? '',
-                              style:
-                                  TextStyle(color: Colors.blue, fontSize: 10),
+                              style: const TextStyle(
+                                  color: Colors.blue, fontSize: 10),
                             ),
                             shape: RoundedRectangleBorder(
                                 side: const BorderSide(
