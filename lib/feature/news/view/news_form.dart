@@ -1,14 +1,13 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fundamental/core/data/entity/news_model.dart';
 import 'package:flutter_fundamental/core/widget/custom_outlined_button.dart';
 import 'package:flutter_fundamental/core/widget/custom_text_field.dart';
 import 'package:flutter_fundamental/core/widget/primary_button.dart';
-import 'package:flutter_fundamental/main.dart';
+import 'package:flutter_fundamental/feature/news/bloc/news_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:objectbox/objectbox.dart';
 
 class NewsForm extends StatefulWidget {
   final NewsModel? news;
@@ -24,7 +23,6 @@ class _NewsFormState extends State<NewsForm> {
   final _categoryController = TextEditingController();
   DateTime? _selectedDate;
   XFile? _image;
-  Box<NewsModel> newsBox = objectbox.store.box<NewsModel>();
 
   @override
   void initState() {
@@ -76,7 +74,8 @@ class _NewsFormState extends State<NewsForm> {
               Expanded(
                 flex: 12,
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(color: Colors.black54),
@@ -86,7 +85,7 @@ class _NewsFormState extends State<NewsForm> {
                       : Text(_selectedDate!.toIso8601String()),
                 ),
               ),
-              Spacer(flex: 1),
+              const Spacer(flex: 1),
               CustomOutlinedButton(
                 onPressed: () async {
                   final date = await showDatePicker(
@@ -101,7 +100,7 @@ class _NewsFormState extends State<NewsForm> {
                     });
                   }
                 },
-                child: Text('Select Date'),
+                child: const Text('Select Date'),
               ),
             ],
           ),
@@ -148,7 +147,7 @@ class _NewsFormState extends State<NewsForm> {
                 imageUrl: _image?.path,
               );
 
-              newsBox.put(news);
+              context.read<NewsBloc>().add(AddNews(news));
 
               setState(() {
                 _titleController.clear();

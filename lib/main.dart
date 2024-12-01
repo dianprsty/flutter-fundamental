@@ -1,32 +1,43 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fundamental/core/data/local/objectbox/objectbox.dart';
 import 'package:flutter_fundamental/core/route/route.dart';
+import 'package:flutter_fundamental/feature/news/bloc/news_bloc.dart';
+import 'package:flutter_fundamental/feature/news/repository/news_data_provider.dart';
+import 'package:flutter_fundamental/feature/news/repository/news_repository.dart';
 
 late ObjectBox objectbox;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   objectbox = await ObjectBox.create();
-  runApp(const MyApp());
+  runApp(MyApp(
+    newsRepository: NewsRepository(
+      newsDataProvider: NewsDataProvider(objectbox: objectbox),
+    ),
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final NewsRepository newsRepository;
+  const MyApp({super.key, required this.newsRepository});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/login',
-      routes: appRoutes,
-      // home: const HomePage(),
-      // home: const ProfilePage(),
-      // home: const LayoutPage(),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+    return BlocProvider(
+        create: (_) => NewsBloc(
+            newsRepository: NewsRepository(
+                newsDataProvider: NewsDataProvider(objectbox: objectbox)))
+          ..add(GetNews()),
+        child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData.light(),
+          darkTheme: ThemeData.dark(),
+          debugShowCheckedModeBanner: false,
+          initialRoute: '/login',
+          routes: appRoutes,
+        ));
   }
 }
 
