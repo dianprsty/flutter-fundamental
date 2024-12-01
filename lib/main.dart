@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fundamental/core/data/local/objectbox/objectbox.dart';
 import 'package:flutter_fundamental/core/route/route.dart';
+import 'package:flutter_fundamental/feature/counter/bloc/counter_bloc.dart';
 
 late ObjectBox objectbox;
 void main() async {
@@ -15,17 +17,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/login',
-      routes: appRoutes,
-      // home: const HomePage(),
-      // home: const ProfilePage(),
-      // home: const LayoutPage(),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return BlocProvider(
+      create: (context) => CounterBloc(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData.light(),
+        darkTheme: ThemeData.dark(),
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/login',
+        routes: appRoutes,
+        // home: const HomePage(),
+        // home: const ProfilePage(),
+        // home: const LayoutPage(),
+        // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      ),
     );
   }
 }

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_fundamental/feature/animation/animation_page.dart';
 import 'package:flutter_fundamental/feature/auth/login_page.dart';
 import 'package:flutter_fundamental/feature/auth/register_page.dart';
+import 'package:flutter_fundamental/feature/counter/view/counter_page.dart';
 import 'package:flutter_fundamental/feature/demo/layout_page.dart';
 import 'package:flutter_fundamental/feature/main/main_page.dart';
+import 'package:flutter_fundamental/feature/news/news_page.dart';
 import 'package:flutter_fundamental/feature/profile/profile_page.dart';
 import 'package:flutter_fundamental/feature/saved/saved_page.dart';
 import 'package:flutter_fundamental/feature/demo/scrollable_page.dart';
@@ -23,4 +25,6 @@ Map<String, Widget Function(BuildContext)> appRoutes = {
   '/notification': (context) => const NotificationAndConfirmation(),
   '/picker': (context) => const Picker(),
   '/animation': (context) => const AnimationPage(),
+  '/counter': (context) => const CounterPage(),
+  '/news': (context) => const NewsPage(),
 };

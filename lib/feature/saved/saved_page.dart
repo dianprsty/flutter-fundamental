@@ -21,7 +21,20 @@ class SavedPage extends StatelessWidget {
             },
             child: const Text('Go to Animation'),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
+          OutlinedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/counter');
+            },
+            child: const Text('Go to Counter'),
+          ),
+          const SizedBox(height: 16),
+          OutlinedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/news');
+            },
+            child: const Text('Go to News'),
+          ),
           // OutlinedButton(
           //   onPressed: () {
           //     Navigator.of(context).push(MaterialPageRoute(
