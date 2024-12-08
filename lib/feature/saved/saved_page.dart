@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fundamental/feature/news/view/news_page.dart';
+import 'package:flutter_fundamental/feature/news_api/view/news_api_page.dart';
 import 'package:flutter_fundamental/feature/responsive/responsive.dart';
 import 'package:flutter_fundamental/feature/todo/todo_page.dart';
 
@@ -38,6 +39,15 @@ class SavedPage extends StatelessWidget {
               ));
             },
             child: const Text('Go to Todo'),
+          ),
+          const SizedBox(height: 16),
+          OutlinedButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const NewsApiPage(),
+              ));
+            },
+            child: const Text('Go to NewsAPI'),
           ),
           const SizedBox(height: 16),
           // GestureDetector(

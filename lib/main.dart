@@ -2,10 +2,12 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fundamental/core/data/local/objectbox/objectbox.dart';
+import 'package:flutter_fundamental/core/data/remote/remote_data_source.dart';
 import 'package:flutter_fundamental/core/route/route.dart';
 import 'package:flutter_fundamental/feature/news/bloc/news_bloc.dart';
 import 'package:flutter_fundamental/feature/news/repository/news_data_provider.dart';
 import 'package:flutter_fundamental/feature/news/repository/news_repository.dart';
+import 'package:flutter_fundamental/feature/news_api/bloc/news_api_bloc.dart';
 
 late ObjectBox objectbox;
 void main() async {
@@ -25,11 +27,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (_) => NewsBloc(
-            newsRepository: NewsRepository(
-                newsDataProvider: NewsDataProvider(objectbox: objectbox)))
-          ..add(GetNews()),
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<NewsBloc>(
+            create: (_) => NewsBloc(
+                newsRepository: NewsRepository(
+                    newsDataProvider: NewsDataProvider(objectbox: objectbox)))
+              ..add(GetNews()),
+          ),
+          BlocProvider<NewsApiBloc>(
+            create: (_) => NewsApiBloc(
+              remoteDataSource: RemoteDataSource(),
+            )..add(LoadNews()),
+          ),
+        ],
         child: MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData.light(),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_fundamental/feature/news_api/bloc/news_api_bloc.dart';
+import 'package:flutter_fundamental/feature/news_api/view/news_card.dart';
 import 'package:lottie/lottie.dart';
 
 List<Map<String, String>> newsArticles = [
@@ -59,197 +62,164 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: ListView(
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [Colors.blue.shade400, Colors.lightBlue.shade300],
-                  )),
-              child: Stack(
-                children: [
-                  Align(
-                      alignment: Alignment.topRight,
-                      child: Lottie.asset('assets/lotties/astronaut.json',
-                          height: 120)),
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 64),
-                      Text(
-                        'Welcome Back, Dian!',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                            color: Colors.white),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        'Discover a world of news that matter to you',
-                        style: TextStyle(fontSize: 14, color: Colors.white),
-                      ),
-                      SizedBox(height: 24),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: Chip(
-                      visualDensity: VisualDensity.compact,
-                      label: const Text('All'),
-                      backgroundColor: Colors.blue,
-                      labelStyle: const TextStyle(color: Colors.white),
-                      shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                            color: Colors.blue,
-                          ),
-                          borderRadius: BorderRadius.circular(32)),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: Chip(
-                      visualDensity: VisualDensity.compact,
-                      label: const Text(
-                        'Bussiness',
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                      shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                            color: Colors.blue,
-                          ),
-                          borderRadius: BorderRadius.circular(32)),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: Chip(
-                      visualDensity: VisualDensity.compact,
-                      label: const Text(
-                        'Technology',
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                      shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                            color: Colors.blue,
-                          ),
-                          borderRadius: BorderRadius.circular(32)),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: Chip(
-                      visualDensity: VisualDensity.compact,
-                      label: const Text(
-                        'Economy',
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                      shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                            color: Colors.blue,
-                          ),
-                          borderRadius: BorderRadius.circular(32)),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: Chip(
-                      visualDensity: VisualDensity.compact,
-                      label: const Text(
-                        'Health',
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                      shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                            color: Colors.blue,
-                          ),
-                          borderRadius: BorderRadius.circular(32)),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Latest News',
-                    style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold)),
-                Text('See All',
-                    style: TextStyle(fontSize: 14, color: Colors.blue)),
-              ],
-            ),
-            const SizedBox(height: 16),
-            ...List.generate(
-              5,
-              (index) => Container(
-                margin: const EdgeInsets.only(bottom: 16),
-                padding: const EdgeInsets.all(16),
+    return RefreshIndicator(
+      onRefresh: () async {
+        context.read<NewsApiBloc>().add(LoadNews());
+      },
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: ListView(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(.05),
-                  borderRadius: BorderRadius.circular(12),
-                  // border: Border.all(color: Colors.grey),
-                ),
-                child: Row(
+                    borderRadius: BorderRadius.circular(16),
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [Colors.blue.shade400, Colors.lightBlue.shade300],
+                    )),
+                child: Stack(
                   children: [
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Chip(
-                            labelPadding: const EdgeInsets.all(0),
-                            visualDensity: VisualDensity.compact,
-                            label: Text(
-                              newsArticles[index]['category'] ?? '',
-                              style: const TextStyle(
-                                  color: Colors.blue, fontSize: 10),
-                            ),
-                            shape: RoundedRectangleBorder(
-                                side: const BorderSide(
-                                  color: Colors.blue,
-                                ),
-                                borderRadius: BorderRadius.circular(32)),
-                          ),
-                          Text(
-                            newsArticles[index]['title'] ?? '',
-                            style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            newsArticles[index]['date'] ?? '',
-                            style: const TextStyle(
-                                fontSize: 14, color: Colors.grey),
-                          )
-                        ],
-                      ),
+                    Align(
+                        alignment: Alignment.topRight,
+                        child: Lottie.asset('assets/lotties/astronaut.json',
+                            height: 120)),
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 64),
+                        Text(
+                          'Welcome Back, Dian!',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24,
+                              color: Colors.white),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          'Discover a world of news that matter to you',
+                          style: TextStyle(fontSize: 14, color: Colors.white),
+                        ),
+                        SizedBox(height: 24),
+                      ],
                     ),
-                    SizedBox(
-                      width: 150,
-                      child: Image.asset(
-                        "assets/images/computer.jpeg",
-                      ),
-                    )
                   ],
                 ),
               ),
-            )
-          ],
+              const SizedBox(height: 16),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: Chip(
+                        visualDensity: VisualDensity.compact,
+                        label: const Text('All'),
+                        backgroundColor: Colors.blue,
+                        labelStyle: const TextStyle(color: Colors.white),
+                        shape: RoundedRectangleBorder(
+                            side: const BorderSide(
+                              color: Colors.blue,
+                            ),
+                            borderRadius: BorderRadius.circular(32)),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: Chip(
+                        visualDensity: VisualDensity.compact,
+                        label: const Text(
+                          'Bussiness',
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                        shape: RoundedRectangleBorder(
+                            side: const BorderSide(
+                              color: Colors.blue,
+                            ),
+                            borderRadius: BorderRadius.circular(32)),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: Chip(
+                        visualDensity: VisualDensity.compact,
+                        label: const Text(
+                          'Technology',
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                        shape: RoundedRectangleBorder(
+                            side: const BorderSide(
+                              color: Colors.blue,
+                            ),
+                            borderRadius: BorderRadius.circular(32)),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: Chip(
+                        visualDensity: VisualDensity.compact,
+                        label: const Text(
+                          'Economy',
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                        shape: RoundedRectangleBorder(
+                            side: const BorderSide(
+                              color: Colors.blue,
+                            ),
+                            borderRadius: BorderRadius.circular(32)),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: Chip(
+                        visualDensity: VisualDensity.compact,
+                        label: const Text(
+                          'Health',
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                        shape: RoundedRectangleBorder(
+                            side: const BorderSide(
+                              color: Colors.blue,
+                            ),
+                            borderRadius: BorderRadius.circular(32)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Latest News',
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold)),
+                  Text('See All',
+                      style: TextStyle(fontSize: 14, color: Colors.blue)),
+                ],
+              ),
+              const SizedBox(height: 16),
+              BlocBuilder<NewsApiBloc, NewsApiState>(builder: (context, state) {
+                if (state is NewsApiLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is NewsApiError) {
+                  return Center(child: Text(state.message));
+                } else if (state is NewsApiLoaded) {
+                  return Column(
+                    children: state.news
+                        .map((news) => NewsApiCard(
+                              news: news,
+                            ))
+                        .toList(),
+                  );
+                }
+                return Center(child: Text('No Data available'));
+              }),
+            ],
+          ),
         ),
       ),
     );
