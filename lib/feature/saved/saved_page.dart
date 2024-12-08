@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_fundamental/feature/news/view/news_page.dart';
+import 'package:flutter_fundamental/feature/product/product_page.dart';
 import 'package:flutter_fundamental/feature/responsive/responsive.dart';
 import 'package:flutter_fundamental/feature/todo/todo_page.dart';
 
@@ -38,6 +39,16 @@ class SavedPage extends StatelessWidget {
               ));
             },
             child: const Text('Go to News'),
+          ),
+
+          const SizedBox(height: 16),
+          OutlinedButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const ProductPage(),
+              ));
+            },
+            child: const Text('Go to Product'),
           ),
           // const SizedBox(height: 16),
           // OutlinedButton(
