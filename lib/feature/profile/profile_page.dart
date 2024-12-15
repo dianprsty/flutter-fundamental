@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fundamental/feature/auth/bloc/auth_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -85,7 +87,19 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: const Text('No'),
                           ),
                           TextButton(
-                            onPressed: () {
+                            onPressed: () async {
+                              try {
+                                context
+                                    .read<AuthBloc>()
+                                    .add(SignOutRequested());
+                              } catch (e) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Logout failed'),
+                                  ),
+                                );
+                              }
+
                               Navigator.pushNamedAndRemoveUntil(
                                 context,
                                 '/login',

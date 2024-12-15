@@ -1,28 +1,41 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fundamental/core/data/local/objectbox/objectbox.dart';
+import 'package:flutter_fundamental/core/data/remote/auth_repository.dart';
 import 'package:flutter_fundamental/core/data/remote/remote_data_source.dart';
 import 'package:flutter_fundamental/core/route/route.dart';
+import 'package:flutter_fundamental/feature/auth/bloc/auth_bloc.dart';
 import 'package:flutter_fundamental/feature/news/bloc/news_bloc.dart';
 import 'package:flutter_fundamental/feature/news/repository/news_data_provider.dart';
 import 'package:flutter_fundamental/feature/news/repository/news_repository.dart';
 import 'package:flutter_fundamental/feature/news_api/bloc/news_api_bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 late ObjectBox objectbox;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  final User? firebaseUser = FirebaseAuth.instance.currentUser;
   objectbox = await ObjectBox.create();
   runApp(MyApp(
     newsRepository: NewsRepository(
       newsDataProvider: NewsDataProvider(objectbox: objectbox),
     ),
+    user: firebaseUser,
   ));
 }
 
 class MyApp extends StatelessWidget {
   final NewsRepository newsRepository;
-  const MyApp({super.key, required this.newsRepository});
+
+  final User? user;
+  const MyApp({super.key, required this.newsRepository, required this.user});
 
   // This widget is the root of your application.
   @override
@@ -40,13 +53,18 @@ class MyApp extends StatelessWidget {
               remoteDataSource: RemoteDataSource(),
             )..add(LoadNews()),
           ),
+          BlocProvider<AuthBloc>(
+            create: (_) => AuthBloc(
+              authRepository: AuthRepository(),
+            ),
+          ),
         ],
         child: MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData.light(),
           darkTheme: ThemeData.dark(),
           debugShowCheckedModeBanner: false,
-          initialRoute: '/login',
+          initialRoute: user == null ? '/' : '/login',
           routes: appRoutes,
         ));
   }
