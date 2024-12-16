@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fundamental/core/widget/bottom_nav_bar.dart';
 import 'package:flutter_fundamental/core/widget/bottom_nav_item.dart';
+import 'package:flutter_fundamental/feature/auth/bloc/auth_bloc.dart';
 import 'package:flutter_fundamental/feature/home/page/home_page.dart';
 import 'package:flutter_fundamental/feature/demo/layout_page.dart';
 import 'package:flutter_fundamental/feature/profile/profile_page.dart';
@@ -35,15 +37,22 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        controller: _pageController,
-        // scrollDirection: Axis.vertical,
-        onPageChanged: (value) {
-          setState(() {
-            _selectedPage = value;
-          });
+      body: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthSuccess && state.user == null) {
+            Navigator.pushReplacementNamed(context, '/login');
+          }
         },
-        children: _pages,
+        child: PageView(
+          controller: _pageController,
+          // scrollDirection: Axis.vertical,
+          onPageChanged: (value) {
+            setState(() {
+              _selectedPage = value;
+            });
+          },
+          children: _pages,
+        ),
       ),
       bottomNavigationBar: BottomNavBar(
         onTap: _onTap,

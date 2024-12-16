@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_fundamental/feature/auth/bloc/auth_bloc.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -22,17 +25,17 @@ class _ProfilePageState extends State<ProfilePage> {
               width: 200,
             ),
             const SizedBox(height: 40),
-            const Text(
-              'Dian Prasetyo',
-              style: TextStyle(
+            Text(
+              FirebaseAuth.instance.currentUser?.displayName ?? '-',
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
             ),
-            const Text(
-              'dprasmail@gmail.com',
-              style: TextStyle(
+            Text(
+              FirebaseAuth.instance.currentUser?.email ?? '-',
+              style: const TextStyle(
                 fontSize: 14,
                 color: Colors.black87,
               ),
@@ -86,11 +89,13 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                '/login',
-                                (_) => false,
-                              );
+                              context.read<AuthBloc>().add(LogoutEvent());
+
+                              // Navigator.pushNamedAndRemoveUntil(
+                              //   context,
+                              //   '/login',
+                              //   (_) => false,
+                              // );
                             },
                             child: const Text('Yes'),
                           ),

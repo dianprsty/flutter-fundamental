@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "789499580838",
+    "project_id": "news-firebase-cbb5a",
+    "storage_bucket": "news-firebase-cbb5a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789499580838:android:99bd63713cccc0a78aff67",
+        "android_client_info": {
+          "package_name": "com.dian.fundamental"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "789499580838-eapi8q53ctg5ihmpp64bdekp0pjda6nb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABuuMe_QyEAwF-dZv7GeMqTArHq0TP8T0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "789499580838-eapi8q53ctg5ihmpp64bdekp0pjda6nb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

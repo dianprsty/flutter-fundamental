@@ -1,8 +1,11 @@
 import 'dart:developer';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fundamental/core/widget/custom_text_field.dart';
 import 'package:flutter_fundamental/core/widget/primary_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_fundamental/feature/auth/bloc/auth_bloc.dart';
+import 'package:flutter_fundamental/feature/auth/login_page.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -13,7 +16,17 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   bool _isSubmited = false;
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -26,6 +39,7 @@ class _LoginFormState extends State<LoginForm> {
         children: [
           CustomTextField(
             label: 'Email',
+            controller: emailController,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter your email';
@@ -40,6 +54,7 @@ class _LoginFormState extends State<LoginForm> {
           const SizedBox(height: 24),
           CustomTextField(
             label: 'Password',
+            controller: passwordController,
             obscureText: true,
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -69,7 +84,9 @@ class _LoginFormState extends State<LoginForm> {
                 return;
               }
 
-              Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+              context.read<AuthBloc>().add(LoginEvent(
+                  email: emailController.text,
+                  password: passwordController.text));
             },
             child: const Text(
               'Sign In',

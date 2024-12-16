@@ -1,12 +1,22 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fundamental/core/data/local/objectbox/objectbox.dart';
+import 'package:flutter_fundamental/core/data/remote/firebase/auth/aurh_repository.dart';
+import 'package:flutter_fundamental/core/data/remote/firebase/contact/contact_repository.dart';
 import 'package:flutter_fundamental/core/route/route.dart';
+import 'package:flutter_fundamental/feature/auth/bloc/auth_bloc.dart';
+import 'package:flutter_fundamental/feature/contact/bloc/contact_bloc.dart';
 import 'package:flutter_fundamental/feature/news/bloc/news_bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 late ObjectBox objectbox;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   objectbox = await ObjectBox.create();
   runApp(const MyApp());
 }
@@ -17,14 +27,25 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => NewsBloc(objectbox)..add(GetNews()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => NewsBloc(objectbox)..add(GetNews()),
+        ),
+        BlocProvider(
+            create: (context) => AuthBloc(authRepository: AuthRepository())),
+        BlocProvider(
+            create: (context) =>
+                ContactBloc(contactRepository: ContactRepository())
+                  ..add(GetContact())),
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
-        initialRoute: '/login',
+        initialRoute:
+            FirebaseAuth.instance.currentUser != null ? '/' : '/login',
         routes: appRoutes,
         // home: const HomePage(),
         // home: const ProfilePage(),

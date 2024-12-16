@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_fundamental/feature/contact/contact_page.dart';
 import 'package:flutter_fundamental/feature/news/view/news_page.dart';
 import 'package:flutter_fundamental/feature/product/product_page.dart';
 import 'package:flutter_fundamental/feature/responsive/responsive.dart';
@@ -49,6 +50,15 @@ class SavedPage extends StatelessWidget {
               ));
             },
             child: const Text('Go to Product'),
+          ),
+          const SizedBox(height: 16),
+          OutlinedButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const ContactPage(),
+              ));
+            },
+            child: const Text('Go to Contact'),
           ),
           // const SizedBox(height: 16),
           // OutlinedButton(
