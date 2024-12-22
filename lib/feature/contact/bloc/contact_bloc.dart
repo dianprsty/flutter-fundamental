@@ -15,14 +15,49 @@ class ContactBloc extends Bloc<ContactEvent, ContactState> {
       emit(ContactLoading());
 
       try {
-        print("something");
         final contacts = await contactRepository.getContacts();
-        print("something 2");
 
-        print(contacts.toString());
         emit(ContactSuccess(contacts ?? []));
       } catch (e) {
-        print(e.toString());
+        emit(ContactError(e.toString()));
+      }
+    });
+    on<AddContact>((event, emit) async {
+      emit(ContactLoading());
+      try {
+        await contactRepository.addContact(
+          event.name,
+          event.email,
+          event.phone,
+        );
+        add(GetContact());
+      } catch (e) {
+        log(e.toString());
+        emit(ContactError(e.toString()));
+      }
+    });
+    on<UpdateContact>((event, emit) async {
+      emit(ContactLoading());
+      try {
+        await contactRepository.updateContact(
+          event.id,
+          event.name,
+          event.email,
+          event.phone,
+        );
+        add(GetContact());
+      } catch (e) {
+        log(e.toString());
+        emit(ContactError(e.toString()));
+      }
+    });
+    on<DeleteContact>((event, emit) async {
+      emit(ContactLoading());
+      try {
+        await contactRepository.deleteContact(event.id);
+        add(GetContact());
+      } catch (e) {
+        log(e.toString());
         emit(ContactError(e.toString()));
       }
     });

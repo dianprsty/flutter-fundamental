@@ -1,18 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fundamental/core/data/entity/contact_model.dart';
+import 'package:flutter_fundamental/feature/contact/bloc/contact_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:path/path.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ContactForm extends StatefulWidget {
-  const ContactForm({super.key});
+  final ContactModel? contact;
+  const ContactForm({super.key, this.contact});
 
   @override
   State<ContactForm> createState() => _ContactFormState();
 }
 
 class _ContactFormState extends State<ContactForm> {
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.contact != null) {
+      _nameController.text = widget.contact!.name ?? '';
+      _emailController.text = widget.contact!.email ?? '';
+      _phoneController.text = widget.contact!.phone ?? '';
+    }
+  }
 
   @override
   void dispose() {
@@ -29,9 +42,9 @@ class _ContactFormState extends State<ContactForm> {
         padding: const EdgeInsets.all(24),
         children: [
           const SizedBox(height: 60),
-          const Text(
-            "Contact Form",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          Text(
+            "${widget.contact != null ? 'Update' : 'Add'} Contact",
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
           ),
           TextField(
@@ -68,14 +81,39 @@ class _ContactFormState extends State<ContactForm> {
                 );
                 return;
               }
-              print(
-                  'Name: ${_nameController.text}, Email: ${_emailController.text}, Phone: ${_phoneController.text}');
+              if (widget.contact != null) {
+                context.read<ContactBloc>().add(UpdateContact(
+                      id: widget.contact!.id ?? '',
+                      name: _nameController.text,
+                      email: _emailController.text,
+                      phone: _phoneController.text,
+                    ));
+              } else {
+                context.read<ContactBloc>().add(AddContact(
+                      name: _nameController.text,
+                      email: _emailController.text,
+                      phone: _phoneController.text,
+                    ));
+              }
+
+              Fluttertoast.showToast(
+                msg: "Contact ${widget.contact != null ? 'updated' : 'added'}",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.blue.shade700,
+                textColor: Colors.white,
+                fontSize: 16.0,
+              );
+              Navigator.pop(context);
             },
             child: const Text('Submit', style: TextStyle(color: Colors.white)),
           ),
           const SizedBox(height: 16),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             child: const Text('Cancel'),
           ),
         ],

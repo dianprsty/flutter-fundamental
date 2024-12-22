@@ -19,12 +19,16 @@ class AddContact extends ContactEvent {
 }
 
 class UpdateContact extends ContactEvent {
+  final String id;
   final String name;
   final String email;
   final String phone;
 
   const UpdateContact(
-      {required this.name, required this.email, required this.phone});
+      {required this.id,
+      required this.name,
+      required this.email,
+      required this.phone});
 }
 
 class DeleteContact extends ContactEvent {
